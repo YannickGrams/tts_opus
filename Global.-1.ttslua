@@ -1,0 +1,56 @@
+--[[ Lua code. See documentation: https://api.tabletopsimulator.com/ --]]
+
+deckCBX_GUID = "11e062"
+deckPBX_GUID = "b3ec76"
+deckMBX_GUID = "669811"
+
+deck4BX_GUID = "2d1d11"
+deck2BX_GUID = "84a9e9"
+deck1BX_GUID = "1acc3c"
+
+zoneCBXCardA_GUID = "4360d8"
+zoneCBXCardB_GUID = "b115e9"
+zoneCBXCardC_GUID = "d1431a"
+zoneCBXCardD_GUID = "0c8634"
+zoneCBXCardE_GUID = "218989"
+zoneCBXDiscard_GUID = "d45ad5"
+
+zonePBXCardA_GUID = "0ef6b2"
+zonePBXCardB_GUID = "68c4cb"
+zonePBXCardC_GUID = "50bc2f"
+zonePBXDiscard_GUID = "cdbdce"
+
+zone4BXCardA_GUID = "777ee2"
+zone4BXCardB_GUID = "463e00"
+zone4BXCardC_GUID = "4f85d1"
+zone4BXDiscard_GUID = "6f4255"
+
+zone2BXCardA_GUID = "9ff72d"
+zone2BXCardB_GUID = "8ffb46"
+zone2BXCardC_GUID = "76d187"
+zone2BXDiscard_GUID = "8a6046"
+
+zone1BXCardA_GUID = "2a1b90"
+zone1BXCardB_GUID = "0f8075"
+zone1BXCardC_GUID = "6336e4"
+zone1BXDiscard_GUID = "d8987e"
+
+actionTokenPurpleA_GUID = "6e6268"
+actionTokenPurpleB_GUID = "7d76da"
+actionTokenPurpleC_GUID = "8739cf"
+actionTokenPurpleD_GUID = "9c4f67"
+actionTokenPurpleE_GUID = "6f80e5"
+
+actionTokenOrangeA_GUID = "c21504"
+actionTokenOrangeB_GUID = "9c1de2"
+actionTokenOrangeC_GUID = "cb0595"
+actionTokenOrangeD_GUID = "76987a"
+actionTokenOrangeE_GUID = "94ac76"
+
+actionTokenNeutralA_GUID = "d646b4"
+actionTokenNeutralB_GUID = "2319b6"
+actionTokenNeutralC_GUID = "bd0f67"
+actionTokenNeutralD_GUID = "47eb79"
+actionTokenNeutralE_GUID = "ea0532"
+
+firstPlayerToken_GUID = "58bb35"

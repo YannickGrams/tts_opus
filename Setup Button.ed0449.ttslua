@@ -1,0 +1,86 @@
+deckCBX_GUID = Global.getVar('deckCBX_GUID')
+deckPBX_GUID = Global.getVar('deckPBX_GUID')
+deckMBX_GUID = Global.getVar('deckMBX_GUID')
+
+deck4BX_GUID = Global.getVar('deck4BX_GUID')
+deck2BX_GUID = Global.getVar('deck2BX_GUID')
+deck1BX_GUID = Global.getVar('deck1BX_GUID')
+
+function onLoad()
+  deckCBX = getObjectFromGUID(deckCBX_GUID)
+  deckPBX = getObjectFromGUID(deckPBX_GUID)
+  deckMBX = getObjectFromGUID(deckMBX_GUID)
+
+  deckCBX_position = deckCBX.getPosition()
+  deckPBX_position = deckPBX.getPosition()
+
+  deck4BX = getObjectFromGUID(deck4BX_GUID)
+  deck2BX = getObjectFromGUID(deck2BX_GUID)
+  deck1BX = getObjectFromGUID(deck1BX_GUID)
+
+  deck4BX_position = deck4BX.getPosition()
+  deck2BX_position = deck2BX.getPosition()
+  deck1BX_position = deck1BX.getPosition()
+end
+
+function setUpGame()
+  deckCBX.randomize()
+  deckPBX.randomize()
+  deckMBX.randomize()
+
+  local cardCBX_position = deckCBX_position[3] - 8.2
+
+  for i = 1, 5 do
+    deckCBX.takeObject({flip = true, position = {deckCBX_position[1], deckCBX_position[2], cardCBX_position}, rotation = {0, 180, 180}})
+    cardCBX_position = cardCBX_position - 8.2
+  end
+
+  local cardPBX_position = deckPBX_position[1] + 11.1
+
+  for i = 1, 3 do
+    deckPBX.takeObject({flip = true, position = {cardPBX_position, deckPBX_position[2], deckPBX_position[3]}, rotation = {0, 180, 180}})
+    cardPBX_position = cardPBX_position + 11.1
+  end
+
+  local cardMBX_startingPoint = Vector({-4.65, 3.91, 13.3})
+  local cardMBX_position = cardMBX_startingPoint[3]
+
+  for i = 1, 3 do
+    deckMBX.takeObject({flip = true, position = {cardMBX_startingPoint[1], cardMBX_startingPoint[2], cardMBX_position}, rotation = {0, 180, 180},
+      callback_function = function(spawnedCard)
+        Wait.frames(function()
+          spawnedCard.setLock(true)
+        end)
+      end})
+    cardMBX_position = cardMBX_position - 8.2
+  end
+
+  destroyObject(deckMBX)
+
+  deck4BX.randomize()
+  deck2BX.randomize()
+  deck1BX.randomize()
+
+  local card4BX_position = deck4BX_position[3] - 6
+
+  for i = 1, 3 do
+    deck4BX.takeObject({flip = true, position = {deck4BX_position[1], deck4BX_position[2], card4BX_position}, rotation = {0, 180, 180}})
+    card4BX_position = card4BX_position - 6
+  end
+
+  local card2BX_position = deck2BX_position[3] - 6
+
+  for i = 1, 3 do
+    deck2BX.takeObject({flip = true, position = {deck2BX_position[1], deck2BX_position[2], card2BX_position}, rotation = {0, 180, 180}})
+    card2BX_position = card2BX_position - 6
+  end
+
+  local card1BX_position = deck1BX_position[3] - 6
+
+  for i = 1, 3 do
+    deck1BX.takeObject({flip = true, position = {deck1BX_position[1], deck1BX_position[2], card1BX_position}, rotation = {0, 180, 180}})
+    card1BX_position = card1BX_position - 6
+  end
+
+  destroyObject(self)
+end

@@ -1,0 +1,217 @@
+-- Ludo Lodge Custom Counter Tokens by Ryan Langewisch
+-- Based on the excellent Universal Counter Tokens by MrStump
+
+-- Adjust the following values to customize the counter's appearance
+-- Every value named in ALL_CAPS is a value you can modify
+
+-- Minimum and maximum values for this counter
+MINIMUM_VALUE = 0     -- Use something like -9999 to allow negatives
+MAXIMUM_VALUE = 200
+
+-- If true: allows you to type a number in the token's description, and then
+--          click the value button to set it directly to that number
+--
+-- Set to false to disable
+ALLOW_SET_FROM_DESCRIPTION = true
+
+-- Button colors (RGB values from 0.0 to 1.0)
+-- For a RGB color that has values 0-255, simply divide by 255
+BUTTON_BACKGROUND_COLOR = {0.95, 0.95, 0.95}
+BUTTON_FONT_COLOR = {0, 0, 0}
+
+-- Value button parameters (this is what shows the current count)
+VALUE_BUTTON_HEIGHT = 10
+VALUE_BUTTON_WIDTH = 10
+VALUE_BUTTON_HORIZONTAL_POSITION = 0     -- Negative for left, positive for right
+VALUE_BUTTON_VERTICAL_POSITION = 0    -- Negative for up, positive for down
+ONE_DIGIT_FONT_SIZE = 1500
+TWO_DIGIT_FONT_SIZE = 1100
+THREE_DIGIT_FONT_SIZE = 700
+FOUR_DIGIT_FONT_SIZE = 500
+
+-- +1 button parameters (button to add 1 to the count)
+PLUS_ONE_BUTTON_HEIGHT = 350
+PLUS_ONE_BUTTON_WIDTH = 350
+PLUS_ONE_BUTTON_HORIZONTAL_POSITION = 2  -- Negative for left, positive for right
+PLUS_ONE_BUTTON_VERTICAL_POSITION = 0   -- Negative for up, positive for down
+PLUS_ONE_BUTTON_FONT_SIZE = 250
+PLUS_ONE_BUTTON_LABEL = '+1'
+
+-- -1 button parameters (button to subtract 1 from the count)
+MINUS_ONE_BUTTON_HEIGHT = 350
+MINUS_ONE_BUTTON_WIDTH = 350
+MINUS_ONE_BUTTON_HORIZONTAL_POSITION = -2   -- Negative for left, positive for right
+MINUS_ONE_BUTTON_VERTICAL_POSITION = 0     -- Negative for up, positive for down
+MINUS_ONE_BUTTON_FONT_SIZE = 250
+MINUS_ONE_BUTTON_LABEL = '-1'
+
+-- +5 button parameters (button to add 5 to the count)
+SHOW_PLUS_FIVE_BUTTON = true   -- Set to false for no +5 button
+PLUS_FIVE_BUTTON_HEIGHT = 350
+PLUS_FIVE_BUTTON_WIDTH = 350
+PLUS_FIVE_BUTTON_HORIZONTAL_POSITION = 1.5   -- Negative for left, positive for right
+PLUS_FIVE_BUTTON_VERTICAL_POSITION = .75       -- Negative for up, positive for down
+PLUS_FIVE_BUTTON_FONT_SIZE = 250
+PLUS_FIVE_BUTTON_LABEL = '+5'
+
+-- -5 button parameters (button to subtract 5 from the count)
+SHOW_MINUS_FIVE_BUTTON = true   -- Set to false for no -5 button
+MINUS_FIVE_BUTTON_HEIGHT = 350
+MINUS_FIVE_BUTTON_WIDTH = 350
+MINUS_FIVE_BUTTON_HORIZONTAL_POSITION = -1.5   -- Negative for left, positive for right
+MINUS_FIVE_BUTTON_VERTICAL_POSITION = .75        -- Negative for up, positive for down
+MINUS_FIVE_BUTTON_FONT_SIZE = 250
+MINUS_FIVE_BUTTON_LABEL = '-5'
+
+--------------------------------------------
+-- CHANGE CODE BELOW AT YOUR OWN RISK. :) --
+--------------------------------------------
+
+-- Load save data and create buttons
+function onLoad(saved_data)
+    -- Load saved count value if save data is found
+    if saved_data != '' then
+        local loaded_data = JSON.decode(saved_data)
+        count = math.max(math.min(loaded_data.saved_count, MAXIMUM_VALUE), MINIMUM_VALUE)
+    else
+
+        count = MINIMUM_VALUE
+    end
+
+    generateButtonParameters()
+    createButtons()
+
+
+end
+
+-- Save count to save data
+function onSave()
+    local data_to_save = {saved_count = count}
+    saved_data = JSON.encode(data_to_save)
+    return saved_data
+end
+
+
+-- Add 1 to the count and update the value button
+function add_one()
+    count = math.min(count + 1, MAXIMUM_VALUE)
+    updateValue()
+end
+
+-- Subtract 1 from the count and update the value button
+function subtract_one()
+
+    count = math.max(count - 1, MINIMUM_VALUE)
+    updateValue()
+
+end
+
+-- Add 5 to the count and update the value button
+function add_five()
+    count = math.min(count + 5, MAXIMUM_VALUE)
+    updateValue()
+end
+
+-- Subtract 5 from the count and update the value button
+function subtract_five()
+
+    count = math.max(count - 5, MINIMUM_VALUE)
+
+    updateValue()
+end
+
+-- Check if the description is a number, and set the count to that number
+function setCountFromDescription()
+    if ALLOW_SET_FROM_DESCRIPTION then
+        local description = self.getDescription()
+        if description != '' and type(tonumber(description)) == 'number' then
+            self.setDescription('')
+            count = tonumber(description)
+            updateValue()
+        end
+    end
+end
+
+-- Update the value button according to the current count
+function updateValue()
+
+    value_button_parameters.font_size = getValueButtonFontSize()
+
+    value_button_parameters.label = tostring(count)
+    self.editButton(value_button_parameters)
+end
+
+-- Return a font size based on the number of digits in the current count
+function getValueButtonFontSize()
+    if count >= 0 and count <= 9 then
+        return ONE_DIGIT_FONT_SIZE
+    elseif count >= 10 and count <= 99 then
+        return TWO_DIGIT_FONT_SIZE
+    elseif count >= 100 and count <= 999 then
+        return THREE_DIGIT_FONT_SIZE
+    elseif count <= -1 and count >= -9 then
+        return TWO_DIGIT_FONT_SIZE
+    elseif count <= -10 and count >= -99 then
+        return THREE_DIGIT_FONT_SIZE
+    else
+        return FOUR_DIGIT_FONT_SIZE
+    end
+end
+
+-- Create buttons based on the button parameters
+function createButtons()
+    value_button_parameters.label = tostring(count)
+    value_button_parameters.font_size = getValueButtonFontSize()
+
+    self.createButton(value_button_parameters)
+    self.createButton(plus_one_button_parameters)
+    self.createButton(minus_one_button_parameters)
+
+    if SHOW_PLUS_FIVE_BUTTON then
+        self.createButton(plus_five_button_parameters)
+    end
+
+    if SHOW_MINUS_FIVE_BUTTON then
+        self.createButton(minus_five_button_parameters)
+    end
+end
+
+-- Load button parameters into tables for button creation
+function generateButtonParameters()
+    value_button_parameters = {
+        index = 0, click_function = 'setCountFromDescription', function_owner = self, label = '',
+        position = {VALUE_BUTTON_HORIZONTAL_POSITION, .4, VALUE_BUTTON_VERTICAL_POSITION},
+        width = VALUE_BUTTON_WIDTH, height = VALUE_BUTTON_HEIGHT,
+        color = BUTTON_BACKGROUND_COLOR, font_color = BUTTON_FONT_COLOR,
+        font_size = getValueButtonFontSize()
+    }
+    plus_one_button_parameters = {
+        click_function = 'add_one', function_owner = self, label = PLUS_ONE_BUTTON_LABEL,
+        position = {PLUS_ONE_BUTTON_HORIZONTAL_POSITION, 0, PLUS_ONE_BUTTON_VERTICAL_POSITION},
+        width = PLUS_ONE_BUTTON_WIDTH, height = PLUS_ONE_BUTTON_HEIGHT,
+        color = BUTTON_BACKGROUND_COLOR, font_color = BUTTON_FONT_COLOR,
+        font_size = PLUS_ONE_BUTTON_FONT_SIZE
+    }
+    minus_one_button_parameters = {
+        click_function = 'subtract_one', function_owner = self, label = MINUS_ONE_BUTTON_LABEL,
+        position = {MINUS_ONE_BUTTON_HORIZONTAL_POSITION, 0, MINUS_ONE_BUTTON_VERTICAL_POSITION},
+        width = MINUS_ONE_BUTTON_WIDTH, height = MINUS_ONE_BUTTON_HEIGHT,
+        color = BUTTON_BACKGROUND_COLOR, font_color = BUTTON_FONT_COLOR,
+        font_size = MINUS_ONE_BUTTON_FONT_SIZE
+    }
+    plus_five_button_parameters = {
+        click_function = 'add_five', function_owner = self, label = PLUS_FIVE_BUTTON_LABEL,
+        position = {PLUS_FIVE_BUTTON_HORIZONTAL_POSITION, 0, PLUS_FIVE_BUTTON_VERTICAL_POSITION},
+        width = PLUS_FIVE_BUTTON_WIDTH, height = PLUS_FIVE_BUTTON_HEIGHT,
+        color = BUTTON_BACKGROUND_COLOR, font_color = BUTTON_FONT_COLOR,
+        font_size = PLUS_FIVE_BUTTON_FONT_SIZE
+    }
+    minus_five_button_parameters = {
+        click_function = 'subtract_five', function_owner = self, label = MINUS_FIVE_BUTTON_LABEL,
+        position = {MINUS_FIVE_BUTTON_HORIZONTAL_POSITION, 0, MINUS_FIVE_BUTTON_VERTICAL_POSITION},
+        width = MINUS_FIVE_BUTTON_WIDTH, height = MINUS_FIVE_BUTTON_HEIGHT,
+        color = BUTTON_BACKGROUND_COLOR, font_color = BUTTON_FONT_COLOR,
+        font_size = MINUS_FIVE_BUTTON_FONT_SIZE
+    }
+
+end

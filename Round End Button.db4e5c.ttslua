@@ -1,0 +1,179 @@
+actionTokenPurpleA_GUID = Global.getVar('actionTokenPurpleA_GUID')
+actionTokenPurpleB_GUID = Global.getVar('actionTokenPurpleB_GUID')
+actionTokenPurpleC_GUID = Global.getVar('actionTokenPurpleC_GUID')
+actionTokenPurpleD_GUID = Global.getVar('actionTokenPurpleD_GUID')
+actionTokenPurpleE_GUID = Global.getVar('actionTokenPurpleE_GUID')
+
+actionTokenOrangeA_GUID = Global.getVar('actionTokenOrangeA_GUID')
+actionTokenOrangeB_GUID = Global.getVar('actionTokenOrangeB_GUID')
+actionTokenOrangeC_GUID = Global.getVar('actionTokenOrangeC_GUID')
+actionTokenOrangeD_GUID = Global.getVar('actionTokenOrangeD_GUID')
+actionTokenOrangeE_GUID = Global.getVar('actionTokenOrangeE_GUID')
+
+actionTokenNeutralA_GUID = Global.getVar('actionTokenNeutralA_GUID')
+actionTokenNeutralB_GUID = Global.getVar('actionTokenNeutralB_GUID')
+actionTokenNeutralC_GUID = Global.getVar('actionTokenNeutralC_GUID')
+actionTokenNeutralD_GUID = Global.getVar('actionTokenNeutralD_GUID')
+actionTokenNeutralE_GUID = Global.getVar('actionTokenNeutralE_GUID')
+
+firstPlayerToken_GUID = Global.getVar('firstPlayerToken_GUID')
+
+deckCBX_GUID = Global.getVar('deckCBX_GUID')
+deckPBX_GUID = Global.getVar('deckPBX_GUID')
+
+deck4BX_GUID = Global.getVar('deck4BX_GUID')
+deck2BX_GUID = Global.getVar('deck2BX_GUID')
+deck1BX_GUID = Global.getVar('deck1BX_GUID')
+
+zoneCBXCardA_GUID = Global.getVar('zoneCBXCardA_GUID')
+zoneCBXCardB_GUID = Global.getVar('zoneCBXCardB_GUID')
+zoneCBXCardC_GUID = Global.getVar('zoneCBXCardC_GUID')
+zoneCBXCardD_GUID = Global.getVar('zoneCBXCardD_GUID')
+zoneCBXCardE_GUID = Global.getVar('zoneCBXCardE_GUID')
+zoneCBXDiscard_GUID = Global.getVar('zoneCBXDiscard_GUID')
+
+zonePBXCardA_GUID = Global.getVar('zonePBXCardA_GUID')
+zonePBXCardB_GUID = Global.getVar('zonePBXCardB_GUID')
+zonePBXCardC_GUID = Global.getVar('zonePBXCardC_GUID')
+zonePBXDiscard_GUID = Global.getVar('zonePBXDiscard_GUID')
+
+zone4BXCardA_GUID = Global.getVar('zone4BXCardA_GUID')
+zone4BXCardB_GUID = Global.getVar('zone4BXCardB_GUID')
+zone4BXCardC_GUID = Global.getVar('zone4BXCardC_GUID')
+zone4BXDiscard_GUID = Global.getVar('zone4BXDiscard_GUID')
+
+zone2BXCardA_GUID = Global.getVar('zone2BXCardA_GUID')
+zone2BXCardB_GUID = Global.getVar('zone2BXCardB_GUID')
+zone2BXCardC_GUID = Global.getVar('zone2BXCardC_GUID')
+zone2BXDiscard_GUID = Global.getVar('zone2BXDiscard_GUID')
+
+zone1BXCardA_GUID = Global.getVar('zone1BXCardA_GUID')
+zone1BXCardB_GUID = Global.getVar('zone1BXCardB_GUID')
+zone1BXCardC_GUID = Global.getVar('zone1BXCardC_GUID')
+zone1BXDiscard_GUID = Global.getVar('zone1BXDiscard_GUID')
+
+tokenRotation = {0, 180, 0}
+
+function onLoad()
+  actionTokenPurpleA = getObjectFromGUID(actionTokenPurpleA_GUID)
+  actionTokenPurpleB = getObjectFromGUID(actionTokenPurpleB_GUID)
+  actionTokenPurpleC = getObjectFromGUID(actionTokenPurpleC_GUID)
+  actionTokenPurpleD = getObjectFromGUID(actionTokenPurpleD_GUID)
+  actionTokenPurpleE = getObjectFromGUID(actionTokenPurpleE_GUID)
+
+  actionTokenOrangeA = getObjectFromGUID(actionTokenOrangeA_GUID)
+  actionTokenOrangeB = getObjectFromGUID(actionTokenOrangeB_GUID)
+  actionTokenOrangeC = getObjectFromGUID(actionTokenOrangeC_GUID)
+  actionTokenOrangeD = getObjectFromGUID(actionTokenOrangeD_GUID)
+  actionTokenOrangeE = getObjectFromGUID(actionTokenOrangeE_GUID)
+
+  actionTokenNeutralA = getObjectFromGUID(actionTokenNeutralA_GUID)
+  actionTokenNeutralB = getObjectFromGUID(actionTokenNeutralB_GUID)
+  actionTokenNeutralC = getObjectFromGUID(actionTokenNeutralC_GUID)
+  actionTokenNeutralD = getObjectFromGUID(actionTokenNeutralD_GUID)
+  actionTokenNeutralE = getObjectFromGUID(actionTokenNeutralE_GUID)
+
+  firstPlayerToken = getObjectFromGUID(firstPlayerToken_GUID)
+  firstPlayer = 1
+
+  deckCBX = getObjectFromGUID(deckCBX_GUID)
+  deckPBX = getObjectFromGUID(deckPBX_GUID)
+  deckMBX = getObjectFromGUID(deckMBX_GUID)
+
+  deck4BX = getObjectFromGUID(deck4BX_GUID)
+  deck2BX = getObjectFromGUID(deck2BX_GUID)
+  deck1BX = getObjectFromGUID(deck1BX_GUID)
+
+  zoneCBXCardA = getObjectFromGUID(zoneCBXCardA_GUID)
+  zoneCBXCardB = getObjectFromGUID(zoneCBXCardB_GUID)
+  zoneCBXCardC = getObjectFromGUID(zoneCBXCardC_GUID)
+  zoneCBXCardD = getObjectFromGUID(zoneCBXCardD_GUID)
+  zoneCBXCardE = getObjectFromGUID(zoneCBXCardE_GUID)
+  zoneCBXDiscard = getObjectFromGUID(zoneCBXDiscard_GUID)
+
+  zonePBXCardA = getObjectFromGUID(zonePBXCardA_GUID)
+  zonePBXCardB = getObjectFromGUID(zonePBXCardB_GUID)
+  zonePBXCardC = getObjectFromGUID(zonePBXCardC_GUID)
+  zonePBXDiscard = getObjectFromGUID(zonePBXDiscard_GUID)
+
+  zone4BXCardA = getObjectFromGUID(zone4BXCardA_GUID)
+  zone4BXCardB = getObjectFromGUID(zone4BXCardB_GUID)
+  zone4BXCardC = getObjectFromGUID(zone4BXCardC_GUID)
+  zone4BXDiscard = getObjectFromGUID(zone4BXDiscard_GUID)
+
+  zone2BXCardA = getObjectFromGUID(zone2BXCardA_GUID)
+  zone2BXCardB = getObjectFromGUID(zone2BXCardB_GUID)
+  zone2BXCardC = getObjectFromGUID(zone2BXCardC_GUID)
+  zone2BXDiscard = getObjectFromGUID(zone2BXDiscard_GUID)
+
+  zone1BXCardA = getObjectFromGUID(zone1BXCardA_GUID)
+  zone1BXCardB = getObjectFromGUID(zone1BXCardB_GUID)
+  zone1BXCardC = getObjectFromGUID(zone1BXCardC_GUID)
+  zone1BXDiscard = getObjectFromGUID(zone1BXDiscard_GUID)
+end
+
+function moveCardOrTile(cardToMove, targetZone, flip)
+  for _, object in ipairs(cardToMove.getObjects()) do
+    if object.type == "Card" then
+      if flip == true then
+        object.flip()
+      end
+      object.setPosition(targetZone)
+    end
+  end
+end
+
+function roundEndUpkeep()
+  moveCardOrTile(zoneCBXCardA, zoneCBXDiscard.getPosition(), true)
+  moveCardOrTile(zoneCBXCardB, zoneCBXCardA.getPosition(), false)
+  moveCardOrTile(zoneCBXCardC, zoneCBXCardB.getPosition(), false)
+  moveCardOrTile(zoneCBXCardD, zoneCBXCardC.getPosition(), false)
+  moveCardOrTile(zoneCBXCardE, zoneCBXCardD.getPosition(), false)
+  deckCBX.takeObject({flip = true, position = zoneCBXCardE.getPosition(), rotation = {0, 180, 180}})
+
+  actionTokenPurpleA.setPositionSmooth({-9.3, 3.8, -17.5}, false, false)
+  actionTokenPurpleB.setPositionSmooth({-9.3, 3.8, -19.85}, false, false)
+  actionTokenPurpleC.setPositionSmooth({-9.3, 3.8, -22.2}, false, false)
+  actionTokenPurpleD.setPositionSmooth({-9.3, 3.8, -24.55}, false, false)
+  actionTokenPurpleE.setPositionSmooth({-9.3, 3.8, -26.9}, false, false)
+
+  actionTokenPurpleA.setRotationSmooth(tokenRotation, false, false)
+  actionTokenPurpleB.setRotationSmooth(tokenRotation, false, false)
+  actionTokenPurpleC.setRotationSmooth(tokenRotation, false, false)
+  actionTokenPurpleD.setRotationSmooth(tokenRotation, false, false)
+  actionTokenPurpleE.setRotationSmooth(tokenRotation, false, false)
+
+  actionTokenOrangeA.setPositionSmooth({9.3, 3.8, -17.5}, false, false)
+  actionTokenOrangeB.setPositionSmooth({9.3, 3.8, -19.85}, false, false)
+  actionTokenOrangeC.setPositionSmooth({9.3, 3.8, -22.2}, false, false)
+  actionTokenOrangeD.setPositionSmooth({9.3, 3.8, -24.55}, false, false)
+  actionTokenOrangeE.setPositionSmooth({9.3, 3.8, -26.9}, false, false)
+
+  actionTokenOrangeA.setRotationSmooth(tokenRotation, false, false)
+  actionTokenOrangeB.setRotationSmooth(tokenRotation, false, false)
+  actionTokenOrangeC.setRotationSmooth(tokenRotation, false, false)
+  actionTokenOrangeD.setRotationSmooth(tokenRotation, false, false)
+  actionTokenOrangeE.setRotationSmooth(tokenRotation, false, false)
+
+  actionTokenNeutralA.setPositionSmooth({7.45, 3.8, -53.68}, false, false)
+  actionTokenNeutralB.setPositionSmooth({3, 3.8, -52.5}, false, false)
+  actionTokenNeutralC.setPositionSmooth({5.35, 3.8, -52.5}, false, false)
+  actionTokenNeutralD.setPositionSmooth({3, 3.8, -54.85}, false, false)
+  actionTokenNeutralE.setPositionSmooth({5.35, 3.8, -54.85}, false, false)
+
+  actionTokenNeutralA.setRotationSmooth(tokenRotation, false, false)
+  actionTokenNeutralB.setRotationSmooth(tokenRotation, false, false)
+  actionTokenNeutralC.setRotationSmooth(tokenRotation, false, false)
+  actionTokenNeutralD.setRotationSmooth(tokenRotation, false, false)
+  actionTokenNeutralE.setRotationSmooth(tokenRotation, false, false)
+
+  if firstPlayer == 1 then
+    firstPlayerToken.setPositionSmooth({9.3, 4.2, -33.2}, false, false)
+    firstPlayerToken.setRotationSmooth(tokenRotation, false, false)
+    firstPlayer = 2
+  else
+    firstPlayerToken.setPositionSmooth({-9.3, 4.2, -33.2}, false, false)
+    firstPlayerToken.setRotationSmooth(tokenRotation, false, false)
+    firstPlayer = 1
+  end
+end
