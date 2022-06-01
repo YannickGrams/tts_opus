@@ -112,13 +112,13 @@ function onLoad()
   zone1BXDiscard = getObjectFromGUID(zone1BXDiscard_GUID)
 end
 
-function moveCardOrTile(cardToMove, targetZone, flip)
-  for _, object in ipairs(cardToMove.getObjects()) do
+function moveCardOrTile(zoneFrom, zoneTo, flip)
+  for _, object in ipairs(zoneFrom.getObjects()) do
     if object.type == "Card" then
       if flip == true then
         object.flip()
       end
-      object.setPosition(targetZone)
+      object.setPosition(zoneTo)
     end
   end
 end
@@ -126,9 +126,53 @@ end
 function roundEndUpkeep()
   moveCardOrTile(zoneCBXCardA, zoneCBXDiscard.getPosition(), true)
   moveCardOrTile(zoneCBXCardB, zoneCBXCardA.getPosition(), false)
-  moveCardOrTile(zoneCBXCardC, zoneCBXCardB.getPosition(), false)
-  moveCardOrTile(zoneCBXCardD, zoneCBXCardC.getPosition(), false)
-  moveCardOrTile(zoneCBXCardE, zoneCBXCardD.getPosition(), false)
+
+  if #zoneCBXCardA.getObjects() == 1 then
+    moveCardOrTile(zoneCBXCardC, zoneCBXCardA.getPosition(), false)
+  elseif #zoneCBXCardA.getObjects() == 2 then
+    moveCardOrTile(zoneCBXCardC, zoneCBXCardB.getPosition(), false)
+  end
+
+  if #zoneCBXCardA.getObjects() == 1 then
+    moveCardOrTile(zoneCBXCardD, zoneCBXCardA.getPosition(), false)
+  elseif #zoneCBXCardA.getObjects() == 2 then
+    if #zoneCBXCardB.getObjects() == 1 then
+      moveCardOrTile(zoneCBXCardD, zoneCBXCardB.getPosition(), false)
+    elseif #zoneCBXCardB.getObjects() == 2 then
+      moveCardOrTile(zoneCBXCardD, zoneCBXCardC.getPosition(), false)
+    end
+  end
+
+  if #zoneCBXCardA.getObjects() == 1 then
+    moveCardOrTile(zoneCBXCardE, zoneCBXCardA.getPosition(), false)
+  elseif #zoneCBXCardA.getObjects() == 2 then
+    if #zoneCBXCardB.getObjects() == 1 then
+      moveCardOrTile(zoneCBXCardE, zoneCBXCardB.getPosition(), false)
+    elseif #zoneCBXCardB.getObjects() == 2 then
+      if #zoneCBXCardC.getObjects() == 1 then
+        moveCardOrTile(zoneCBXCardE, zoneCBXCardC.getPosition(), false)
+      elseif #zoneCBXCardC.getObjects() == 2 then
+        moveCardOrTile(zoneCBXCardE, zoneCBXCardD.getPosition(), false)
+      end
+    end
+  end
+
+  if #zoneCBXCardA.getObjects() == 1 then
+    deckCBX.takeObject({flip = true, position = zoneCBXCardA.getPosition(), rotation = {0, 180, 180}})
+  end
+
+  if #zoneCBXCardB.getObjects() == 1 then
+    deckCBX.takeObject({flip = true, position = zoneCBXCardB.getPosition(), rotation = {0, 180, 180}})
+  end
+
+  if #zoneCBXCardC.getObjects() == 1 then
+    deckCBX.takeObject({flip = true, position = zoneCBXCardC.getPosition(), rotation = {0, 180, 180}})
+  end
+
+  if #zoneCBXCardD.getObjects() == 1 then
+    deckCBX.takeObject({flip = true, position = zoneCBXCardD.getPosition(), rotation = {0, 180, 180}})
+  end
+
   deckCBX.takeObject({flip = true, position = zoneCBXCardE.getPosition(), rotation = {0, 180, 180}})
 
   actionTokenPurpleA.setPositionSmooth({-9.3, 3.8, -17.5}, false, false)
